@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Arivumaiyam · Kaashmikhaa Technologies</title>
+<meta name="description" content="8 production-grade AI applications built by one engineer. LLM gateways, astrology SaaS, encrypted tools — self-hosted from Abu Dhabi.">
+<meta property="og:title" content="Arivumaiyam · Kaashmikhaa Technologies">
+<meta property="og:description" content="One engineer. Eight production apps. Zero compromises.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://arivumaiyam.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#04050a;--bg2:#080c14;--bg3:#0d1220;--bdr:rgba(14,165,233,.12);--cyan:#0ea5e9;--indigo:#6366f1;--txt:#e8eaf6;--txt2:#94a3b8;--green:#22c55e;--gold:#f59e0b;--red:#ef4444;--radius:14px}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:'Space Grotesk',system-ui,sans-serif;line-height:1.6;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.025'/%3E%3C/svg%3E");pointer-events:none;z-index:0}
+a{color:var(--cyan);text-decoration:none}
+code,.mono{font-family:'Space Mono',monospace}
+
+/* Nav */
+nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(4,5,10,.85);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.05);padding:14px 0}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-size:20px;font-weight:700;color:#fff}.brand span{color:var(--cyan)}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{color:var(--txt2);font-size:14px;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:#fff}
+.btn-cta{padding:8px 20px;background:var(--cyan);color:#000;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-cta:hover{background:#38bdf8;transform:translateY(-1px)}
+.btn-ghost{padding:8px 20px;background:transparent;border:1px solid rgba(255,255,255,.15);color:#fff;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}
+.hamburger{display:none;background:none;border:none;color:#fff;font-size:24px;cursor:pointer}
+
+/* Sections */
+section{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:100px 24px 60px}
+.section-title{font-size:13px;text-transform:uppercase;letter-spacing:2px;color:var(--cyan);font-weight:600;margin-bottom:12px}
+.section-heading{font-size:36px;font-weight:700;margin-bottom:16px;color:#fff}
+
+/* Hero */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding-top:80px;text-align:center;position:relative}
+.hero::before{content:'';position:absolute;top:20%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(14,165,233,.08) 0%,transparent 70%);pointer-events:none}
+.hero::after{content:'';position:absolute;top:40%;right:10%;width:400px;height:400px;background:radial-gradient(circle,rgba(99,102,241,.06) 0%,transparent 70%);pointer-events:none}
+.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(14,165,233,.08);border:1px solid rgba(14,165,233,.2);border-radius:100px;padding:6px 16px;font-size:13px;color:var(--cyan);margin-bottom:28px}
+.pulse{width:8px;height:8px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+.hero h1{font-size:clamp(40px,7vw,82px);font-weight:700;line-height:1.05;margin-bottom:24px;color:#fff}
+.hero h1 .gradient{background:linear-gradient(135deg,var(--cyan),var(--indigo));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:18px;color:var(--txt2);max-width:640px;margin:0 auto 36px;line-height:1.7}
+.hero-buttons{display:flex;gap:12px;justify-content:center;margin-bottom:48px}
+.stats{display:flex;gap:40px;justify-content:center;flex-wrap:wrap}
+.stat{text-align:center}
+.stat-num{font-size:36px;font-weight:700;color:#fff;font-family:'Space Mono',monospace}
+.stat-label{font-size:12px;color:var(--txt2);text-transform:uppercase;letter-spacing:1px}
+
+/* Products */
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:24px}
+.product-card{background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--radius);padding:22px;transition:all .3s;position:relative;overflow:hidden}
+.product-card:hover{border-color:rgba(14,165,233,.3);transform:translateY(-3px);box-shadow:0 12px 40px rgba(14,165,233,.08)}
+.card-status{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;padding:3px 10px;border-radius:100px}
+.status-live{background:rgba(34,197,94,.12);color:var(--green);border:1px solid rgba(34,197,94,.2)}
+.status-dev{background:rgba(245,158,11,.1);color:var(--gold);border:1px solid rgba(245,158,11,.2)}
+.product-card h3{font-size:18px;font-weight:600;color:#fff;margin-bottom:4px}
+.product-card .subtitle{font-size:12px;color:var(--cyan);margin-bottom:10px}
+.product-card p{font-size:13px;color:var(--txt2);margin-bottom:12px;line-height:1.5}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:11px;padding:3px 8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:6px;color:var(--txt2)}
+
+/* Subdomains */
+.subdomains-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:24px}
+.subdomain-card{display:flex;align-items:center;gap:12px;background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;padding:14px 18px;transition:all .2s}
+.subdomain-card:hover{border-color:var(--cyan);background:var(--bg3)}
+.subdomain-icon{font-size:24px}
+.subdomain-url{font-size:13px;color:var(--cyan);font-family:'Space Mono',monospace}
+.subdomain-desc{font-size:12px;color:var(--txt2)}
+
+/* Live Status */
+.status-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:20px}
+.status-item{display:flex;align-items:center;gap:10px;background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:12px 16px}
+.status-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.dot-up{background:var(--green);box-shadow:0 0 8px rgba(34,197,94,.4)}
+.dot-down{background:var(--red);box-shadow:0 0 8px rgba(239,68,68,.4)}
+.dot-unknown{background:#475569}
+.status-name{font-size:14px;font-weight:500}
+.status-latency{font-size:11px;color:var(--txt2);margin-left:auto;font-family:'Space Mono',monospace}
+
+/* About */
+.about-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:48px;align-items:start;margin-top:24px}
+.about-photo{text-align:center}
+.about-avatar{width:180px;height:180px;border-radius:50%;background:var(--bg2);border:3px solid var(--bdr);display:flex;align-items:center;justify-content:center;font-size:80px;margin:0 auto 16px}
+.about-role{font-size:12px;color:var(--cyan);background:rgba(14,165,233,.08);border:1px solid rgba(14,165,233,.15);padding:6px 14px;border-radius:100px;display:inline-block}
+.about-name{font-size:28px;font-weight:700;color:#fff;margin-bottom:12px}
+.about-bio{font-size:15px;color:var(--txt2);line-height:1.8;margin-bottom:20px}
+.skills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.skill{font-size:12px;padding:5px 12px;background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.2);border-radius:6px;color:var(--indigo)}
+.social-links{display:flex;gap:12px}
+.social-links a{padding:8px 16px;background:var(--bg3);border:1px solid var(--bdr);border-radius:8px;font-size:13px;color:var(--txt2);transition:all .2s}
+.social-links a:hover{border-color:var(--cyan);color:var(--cyan)}
+
+/* Company */
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.pillar{background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--radius);padding:28px;text-align:center;transition:all .3s}
+.pillar:hover{border-color:rgba(14,165,233,.25)}
+.pillar-icon{font-size:36px;margin-bottom:12px}
+.pillar h3{font-size:18px;font-weight:600;color:#fff;margin-bottom:8px}
+.pillar p{font-size:13px;color:var(--txt2);line-height:1.6}
+.tech-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:32px}
+.tech-item{font-size:12px;padding:6px 14px;background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;color:var(--txt2)}
+
+/* Footer */
+footer{border-top:1px solid rgba(255,255,255,.05);padding:40px 24px;text-align:center;color:var(--txt2);font-size:13px;position:relative;z-index:1}
+footer .footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+footer a{color:var(--txt2);margin:0 12px}
+footer a:hover{color:var(--cyan)}
+
+/* Reveal animation */
+.reveal{opacity:0;transform:translateY(30px);transition:all .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* Responsive */
+@media(max-width:768px){
+  .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:var(--bg2);flex-direction:column;padding:20px;gap:16px;border-bottom:1px solid var(--bdr)}
+  .nav-links.open{display:flex}
+  .hamburger{display:block}
+  .hero h1{font-size:36px}
+  .stats{gap:20px}
+  .stat-num{font-size:28px}
+  .about-grid{grid-template-columns:1fr}
+  .pillars{grid-template-columns:1fr}
+  .hero-buttons{flex-direction:column;align-items:center}
+  footer .footer-inner{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="brand"><span>Arivu</span>maiyam</a>
+    <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    <div class="nav-links">
+      <a href="#products">Products</a>
+      <a href="#about">About</a>
+      <a href="#company">Company</a>
+      <a href="https://chat.arivumaiyam.com" class="btn-cta">Try Arivu →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+  <div class="badge"><span class="pulse"></span> Building AI products from one machine</div>
+  <h1>One engineer.<br><span class="gradient">Eight production apps.</span><br>Zero compromises.</h1>
+  <p>Kaashmikhaa Technologies builds production-grade AI applications — from LLM gateways to astrology SaaS — entirely self-hosted and Cloudflare-tunneled from a single laptop in Abu Dhabi.</p>
+  <div class="hero-buttons">
+    <a href="#products" class="btn-cta" style="font-size:15px;padding:12px 28px">View Products</a>
+    <a href="#about" class="btn-ghost" style="font-size:15px;padding:12px 28px">About Bala →</a>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="stat-num" data-target="8">0</div><div class="stat-label">Production Apps</div></div>
+    <div class="stat"><div class="stat-num" data-target="84">0</div><div class="stat-label">AI Models Supported</div></div>
+    <div class="stat"><div class="stat-num" data-target="401">0</div><div class="stat-label">Training Samples</div></div>
+    <div class="stat"><div class="stat-num" data-target="9">0</div><div class="stat-label">Years Aviation IT</div></div>
+  </div>
+</section>
+
+<!-- Products -->
+<section id="products" class="reveal">
+  <div class="section-title">Products</div>
+  <div class="section-heading">Built to Production. Shipped to Users.</div>
+  <div class="products-grid">
+    <div class="product-card">
+      <span class="card-status status-live"><span class="pulse"></span> Live</span>
+      <h3>Neural Brain API</h3>
+      <div class="subtitle">LLM Gateway & AI Engine</div>
+      <p>84+ models across 15 providers. Ensemble routing, fine-tuning, fallback chains.</p>
+      <div class="tags"><span class="tag">FastAPI</span><span class="tag">Python</span><span class="tag">SQLite</span><span class="tag">84+ Models</span></div>
+    </div>
+    <div class="product-card">
+      <span class="card-status status-live"><span class="pulse"></span> Live</span>
+      <h3>ArivuClaw</h3>
+      <div class="subtitle">Personal AI Agent</div>
+      <p>7 real tools with tool calling across all providers. SQLite memory, conversation context.</p>
+      <div class="tags"><span class="tag">Node.js</span><span class="tag">TypeScript</span><span class="tag">MiniMax</span><span class="tag">7 Tools</span></div>
+    </div>
+    <div class="product-card">
+      <span class="card-status status-live"><span class="pulse"></span> Live</span>
+      <h3>KaasAI Brainovity</h3>
+      <div class="subtitle">Self-hosted AI Platform</div>
+      <p>Zero npm dependencies. Stripe billing, MCP support, 80/80 test coverage.</p>
+      <div class="tags"><span class="tag">Node.js</span><span class="tag">SQLite</span><span class="tag">Stripe</span><span class="tag">80/80 Tests</span></div>
+    </div>
+    <div class="product-card">
+      <span class="card-status status-live"><span class="pulse"></span> Live</span>
+      <h3>Valluvan Astrologer</h3>
+      <div class="subtitle">Vedic Astrology SaaS</div>
+      <p>60+ chart types, 12 Tamil rasis, nakshatras, birth chart generation.</p>
+      <div class="tags"><span class="tag">Flask</span><span class="tag">Python</span><span class="tag">SQLite</span><span class="tag">Tamil</span></div>
+    </div>
+    <div class="product-card">
+      <span class="card-status status-live"><span class="pulse"></span> Live</span>
+      <h3>OpsShiftPro</h3>
+      <div class="subtitle">Shift Handover Platform</div>
+      <p>Checklists, handover items, shift reports, operator management.</p>
+      <div class="tags"><span class="tag">Express</span><span class="tag">Node.js</span><span class="tag">SQLite</span><span class="tag">JWT</span></div>
+    </div>
+    <div class="product-card">
+      <span class="card-status status-live"><span class="pulse"></span> Live</span>
+      <h3>OpsWatch Unified</h3>
+      <div class="subtitle">Infrastructure Monitoring</div>
+      <p>Service health checks, alerts, incidents, uptime tracking, dashboard stats.</p>
+      <div class="tags"><span class="tag">Express</span><span class="tag">Axios</span><span class="tag">SQLite</span><span class="tag">Real-time</span></div>
+    </div>
+    <div class="product-card">
+      <span class="card-status status-live"><span class="pulse"></span> Live</span>
+      <h3>Vault Browser</h3>
+      <div class="subtitle">Encrypted Password Manager</div>
+      <p>AES-256-GCM encryption, scrypt key derivation, password generator, vault export.</p>
+      <div class="tags"><span class="tag">Express</span><span class="tag">Crypto</span><span class="tag">SQLite</span><span class="tag">AES-256</span></div>
+    </div>
+    <div class="product-card">
+      <span class="card-status status-live"><span class="pulse"></span> Live</span>
+      <h3>Arivu Maiyam</h3>
+      <div class="subtitle">Family Hub</div>
+      <p>Real-time chat, WebRTC voice calls, shopping lists, journal, calendar events.</p>
+      <div class="tags"><span class="tag">Express</span><span class="tag">WebSocket</span><span class="tag">SQLite</span><span class="tag">WebRTC</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Subdomains -->
+<section class="reveal">
+  <div class="section-title">Ecosystem</div>
+  <div class="section-heading">Access All Services</div>
+  <div class="subdomains-grid">
+    <a href="https://chat.arivumaiyam.com" class="subdomain-card"><span class="subdomain-icon">🤖</span><div><div class="subdomain-url">chat.arivumaiyam.com</div><div class="subdomain-desc">Arivu AI Chat</div></div></a>
+    <a href="https://brain.arivumaiyam.com" class="subdomain-card"><span class="subdomain-icon">🧠</span><div><div class="subdomain-url">brain.arivumaiyam.com</div><div class="subdomain-desc">Neural Brain API</div></div></a>
+    <a href="https://watch.arivumaiyam.com" class="subdomain-card"><span class="subdomain-icon">🦅</span><div><div class="subdomain-url">watch.arivumaiyam.com</div><div class="subdomain-desc">ArivuWatch Dashboard</div></div></a>
+    <a href="https://astro.arivumaiyam.com" class="subdomain-card"><span class="subdomain-icon">🔮</span><div><div class="subdomain-url">astro.arivumaiyam.com</div><div class="subdomain-desc">Valluvan Astrologer</div></div></a>
+    <a href="https://shift.arivumaiyam.com" class="subdomain-card"><span class="subdomain-icon">🔄</span><div><div class="subdomain-url">shift.arivumaiyam.com</div><div class="subdomain-desc">OpsShiftPro</div></div></a>
+    <a href="https://ops.arivumaiyam.com" class="subdomain-card"><span class="subdomain-icon">📊</span><div><div class="subdomain-url">ops.arivumaiyam.com</div><div class="subdomain-desc">OpsWatch Unified</div></div></a>
+    <a href="https://vault.arivumaiyam.com" class="subdomain-card"><span class="subdomain-icon">🔐</span><div><div class="subdomain-url">vault.arivumaiyam.com</div><div class="subdomain-desc">Vault Browser</div></div></a>
+    <a href="https://family.arivumaiyam.com" class="subdomain-card"><span class="subdomain-icon">🏠</span><div><div class="subdomain-url">family.arivumaiyam.com</div><div class="subdomain-desc">Family Hub</div></div></a>
+  </div>
+</section>
+
+<!-- Live Status -->
+<section class="reveal" id="status">
+  <div class="section-title">Infrastructure</div>
+  <div class="section-heading">Live Service Status</div>
+  <p style="color:var(--txt2);margin-bottom:8px;font-size:13px">Auto-refreshes every 30 seconds · Powered by Cloudflare Tunnel</p>
+  <div class="status-grid" id="status-grid">
+    <div class="status-item"><div class="status-dot dot-unknown"></div><span class="status-name">Loading...</span></div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about" class="reveal">
+  <div class="section-title">About</div>
+  <div class="section-heading">The Engineer Behind It All</div>
+  <div class="about-grid">
+    <div class="about-photo">
+      <div class="about-avatar">👨‍💻</div>
+      <div class="about-role">Application Support Manager · Etihad Airways · Abu Dhabi</div>
+    </div>
+    <div>
+      <div class="about-name">Balamurugan Suriyaprakash</div>
+      <p class="about-bio">9+ years in aviation IT operations at one of the world's leading airlines. Building production AI tools in nights and weekends — from LLM gateways serving 84+ models to a Vedic astrology platform processing Tamil birth charts. Every app is self-hosted, self-built, and tunneled through Cloudflare from a single ThinkPad in Abu Dhabi.</p>
+      <div class="skills">
+        <span class="skill">Python</span><span class="skill">Node.js</span><span class="skill">TypeScript</span>
+        <span class="skill">React Native</span><span class="skill">Go</span><span class="skill">FastAPI</span>
+        <span class="skill">Flask</span><span class="skill">Express</span><span class="skill">SQLite</span>
+        <span class="skill">Docker</span><span class="skill">Cloudflare</span><span class="skill">Ollama</span>
+        <span class="skill">QLoRA</span><span class="skill">Unsloth</span>
+      </div>
+      <div class="social-links">
+        <a href="https://github.com/balas072024">GitHub</a>
+        <a href="mailto:balamuruganspondy@gmail.com">Email</a>
+        <a href="https://chat.arivumaiyam.com">Arivu Chat</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Company -->
+<section id="company" class="reveal">
+  <div class="section-title">Company</div>
+  <div class="section-heading">Kaashmikhaa Technologies</div>
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-icon">🔓</div>
+      <h3>Build in Public</h3>
+      <p>Transparent development, open-source where possible, community-first approach to shipping software.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">🏗️</div>
+      <h3>Own Your Stack</h3>
+      <p>Self-hosted, no vendor lock-in, local-first architecture. Every byte runs on infrastructure you control.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">🌍</div>
+      <h3>MENA-First</h3>
+      <p>Arabic RTL support, Tamil language integration, building for underserved markets in the Middle East.</p>
+    </div>
+  </div>
+  <div class="tech-row">
+    <span class="tech-item">Python</span><span class="tech-item">FastAPI</span><span class="tech-item">Node.js</span>
+    <span class="tech-item">React Native</span><span class="tech-item">Go</span><span class="tech-item">SQLite</span>
+    <span class="tech-item">Ollama</span><span class="tech-item">Cloudflare</span><span class="tech-item">Docker</span>
+    <span class="tech-item">Electron</span><span class="tech-item">Unsloth</span>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <div><span class="brand" style="font-size:16px"><span style="color:var(--cyan)">Arivu</span>maiyam</span> · © 2026 Kaashmikhaa Technologies</div>
+    <div>
+      <a href="#products">Products</a>
+      <a href="#about">About</a>
+      <a href="https://github.com/balas072024">GitHub</a>
+      <a href="mailto:balamuruganspondy@gmail.com">Contact</a>
+    </div>
+    <div style="font-size:12px">Built with ❤️ from Abu Dhabi</div>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Counter animation
+let counted = false;
+const statsObserver = new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting && !counted) {
+    counted = true;
+    document.querySelectorAll('.stat-num').forEach(el => {
+      const target = +el.dataset.target;
+      let current = 0;
+      const step = Math.max(1, Math.floor(target / 40));
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= target) { current = target; clearInterval(timer); }
+        el.textContent = current + (target >= 8 && target <= 9 ? '' : '+');
+      }, 30);
+    });
+  }
+}, { threshold: 0.5 });
+const statsEl = document.querySelector('.stats');
+if (statsEl) statsObserver.observe(statsEl);
+
+// Live service status
+const SERVICES = [
+  { name: 'Neural Brain API', url: '/api/health' },
+  { name: 'Family Hub', url: '/api/health' },
+  { name: 'ArivuWatch', url: '/api/health' },
+  { name: 'Vault Browser', url: '/api/health' },
+  { name: 'OpsWatch', url: '/api/health' },
+  { name: 'OpsShiftPro', url: '/api/health' },
+  { name: 'Valluvan Astrologer', url: '/api/health' },
+  { name: 'Arivu Mobile', url: '/api/health' },
+];
+
+async function loadStatus() {
+  try {
+    const r = await fetch('/api/health/services');
+    if (!r.ok) throw new Error('Failed');
+    const data = await r.json();
+    const grid = document.getElementById('status-grid');
+    if (data.services || data.results) {
+      const services = data.services || data.results || [];
+      grid.innerHTML = services.map(s => `
+        <div class="status-item">
+          <div class="status-dot dot-${s.status === 'up' || s.healthy ? 'up' : 'down'}"></div>
+          <span class="status-name">${s.name}</span>
+          <span class="status-latency">${s.latency ? s.latency + 'ms' : s.status === 'up' ? 'OK' : '—'}</span>
+        </div>
+      `).join('');
+    }
+  } catch {
+    document.getElementById('status-grid').innerHTML = SERVICES.map(s => `
+      <div class="status-item">
+        <div class="status-dot dot-unknown"></div>
+        <span class="status-name">${s.name}</span>
+        <span class="status-latency">—</span>
+      </div>
+    `).join('');
+  }
+}
+loadStatus();
+setInterval(loadStatus, 30000);
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.querySelector('.nav-links')?.classList.remove('open');
+  });
+});
+</script>
+</body>
+</html>

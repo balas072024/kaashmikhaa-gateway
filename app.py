@@ -595,8 +595,14 @@ def analytics():
 # ---------------------------------------------------------------------------
 
 @app.route("/")
+def landing():
+    """Serve the public arivumaiyam.com landing page."""
+    return render_template("landing.html")
+
+
+@app.route("/admin")
 def dashboard():
-    """Serve the dashboard UI."""
+    """Serve the gateway admin dashboard."""
     return render_template("index.html")
 
 
@@ -608,7 +614,7 @@ def dashboard():
 def not_found(e):
     if request.path.startswith("/api/") or request.path.startswith("/gateway/"):
         return jsonify({"error": "Not found"}), 404
-    return render_template("index.html"), 200
+    return render_template("landing.html"), 200
 
 
 @app.errorhandler(405)
