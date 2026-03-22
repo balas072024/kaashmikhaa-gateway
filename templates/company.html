@@ -1,159 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Kaashmikhaa Technologies</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#04050a;--bg2:#080c14;--bg3:#0d1220;--acc:#7c6bff;--txt:#e2e8f0;--txt2:#94a3b8;--bdr:rgba(124,107,255,.18);--bdr2:rgba(124,107,255,.35)}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--txt);font-family:"Segoe UI",system-ui,sans-serif;overflow-x:hidden}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(4,5,10,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:64px}
-.nav-logo{font-size:18px;font-weight:700;color:#c4b5fd;text-decoration:none}
-.nav-links{display:flex;align-items:center;gap:32px}
-.nav-links a{color:var(--txt2);text-decoration:none;font-size:14px;font-weight:500}
-.nav-links a:hover{color:var(--txt)}
-.nav-cta{padding:8px 20px;background:var(--acc);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none}
-.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:100px 24px 60px;position:relative;overflow:hidden}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(124,107,255,.12),transparent 70%),linear-gradient(rgba(124,107,255,.03)1px,transparent 1px),linear-gradient(90deg,rgba(124,107,255,.03)1px,transparent 1px);background-size:auto,60px 60px,60px 60px}
-.hero-content{position:relative;max-width:800px}
-.badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:rgba(124,107,255,.1);border:1px solid var(--bdr2);border-radius:100px;font-size:13px;color:#c4b5fd;margin-bottom:32px}
-.badge-dot{width:6px;height:6px;border-radius:50%;background:#c4b5fd;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-h1{font-size:clamp(36px,6vw,72px);font-weight:800;line-height:1.1;margin-bottom:24px;background:linear-gradient(135deg,#e2e8f0,#c4b5fd,#7c6bff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero p{font-size:18px;color:var(--txt2);line-height:1.7;margin-bottom:40px;max-width:600px;margin-left:auto;margin-right:auto}
-.btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
-.btn-p{padding:14px 32px;background:var(--acc);color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:600;text-decoration:none;display:inline-block}
-.btn-p:hover{opacity:.85}
-.btn-s{padding:14px 32px;background:transparent;color:var(--txt);border:1px solid var(--bdr2);border-radius:10px;font-size:16px;font-weight:600;text-decoration:none;display:inline-block}
-.btn-s:hover{background:rgba(124,107,255,.1)}
-.stats{display:flex;gap:48px;justify-content:center;margin-top:64px;flex-wrap:wrap}
-.stat-num{font-size:32px;font-weight:800;color:#c4b5fd;text-align:center}
-.stat-label{font-size:13px;color:var(--txt2);margin-top:4px;text-align:center}
-section{padding:100px 24px}
-.container{max-width:1200px;margin:0 auto}
-.label{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:12px}
-.sec-title{font-size:clamp(28px,4vw,48px);font-weight:800;margin-bottom:16px;background:linear-gradient(135deg,#e2e8f0,#c4b5fd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.sec-sub{font-size:16px;color:var(--txt2);line-height:1.7;max-width:600px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px;margin-top:56px}
-.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:20px;padding:32px;transition:.2s;position:relative;overflow:hidden}
-.card:hover{border-color:var(--bdr2);transform:translateY(-4px)}
-.card-icon{font-size:36px;margin-bottom:20px}
-.card-name{font-size:20px;font-weight:700;margin-bottom:8px;color:#e2e8f0}
-.card-desc{font-size:14px;color:var(--txt2);line-height:1.7;margin-bottom:20px}
-.tags{display:flex;gap:8px;flex-wrap:wrap}
-.tag{padding:4px 10px;background:rgba(124,107,255,.1);border:1px solid var(--bdr);border-radius:6px;font-size:12px;color:#c4b5fd}
-.pill{position:absolute;top:20px;right:20px;padding:4px 10px;border-radius:100px;font-size:11px;font-weight:600}
-.live{background:rgba(34,197,94,.15);color:#22c55e;border:1px solid rgba(34,197,94,.3)}
-.beta{background:rgba(245,158,11,.15);color:#f59e0b;border:1px solid rgba(245,158,11,.3)}
-.dev{background:rgba(148,163,184,.1);color:#94a3b8;border:1px solid rgba(148,163,184,.2)}
-.stack-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:16px;margin-top:48px}
-.stack-item{background:var(--bg2);border:1px solid var(--bdr);border-radius:14px;padding:20px;text-align:center}
-.stack-item:hover{border-color:var(--bdr2)}
-.cta-box{background:radial-gradient(ellipse at center,rgba(124,107,255,.15),transparent 70%);border:1px solid var(--bdr);border-radius:24px;padding:80px 48px;text-align:center}
-.cta-box h2{font-size:clamp(28px,4vw,48px);font-weight:800;margin-bottom:16px;background:linear-gradient(135deg,#e2e8f0,#c4b5fd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.cta-box p{font-size:16px;color:var(--txt2);margin-bottom:40px}
-footer{border-top:1px solid var(--bdr);padding:48px 40px}
-.footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px}
-.footer-brand{font-size:16px;font-weight:700;color:#c4b5fd}
-.footer-links{display:flex;gap:24px}
-.footer-links a{color:var(--txt2);text-decoration:none;font-size:14px}
-.footer-links a:hover{color:var(--txt)}
-.copy{color:#475569;font-size:13px}
-@media(max-width:768px){nav{padding:0 20px}.nav-links{display:none}.stats{gap:24px}.cta-box{padding:40px 24px}}
-</style>
-</head>
-<body>
-
-<nav>
-  <a class="nav-logo" href="#">⚡ Kaashmikhaa</a>
-  <div class="nav-links">
-    <a href="#products">Products</a>
-    <a href="#stack">Stack</a>
-    <a href="https://family.arivumaiyam.com" class="nav-cta">Family Hub →</a>
-  </div>
-</nav>
-
-<div class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-content">
-    <div class="badge"><div class="badge-dot"></div>Building AI-powered products from Abu Dhabi</div>
-    <h1>Intelligence<br>Built Different</h1>
-    <p>Kaashmikhaa Technologies builds AI systems, SaaS products, and automation tools — blending Tamil innovation with enterprise-grade engineering.</p>
-    <div class="btns">
-      <a href="#products" class="btn-p">Explore Products</a>
-      <a href="https://chat.arivumaiyam.com" class="btn-s">Try ClawArivu →</a>
-    </div>
-    <div class="stats">
-      <div><div class="stat-num">9+</div><div class="stat-label">Products Built</div></div>
-      <div><div class="stat-num">40+</div><div class="stat-label">AI Models</div></div>
-      <div><div class="stat-num">36</div><div class="stat-label">Tools</div></div>
-      <div><div class="stat-num">$204K</div><div class="stat-label">ARR Target</div></div>
-    </div>
-  </div>
-</div>
-
-<section id="products">
-  <div class="container">
-    <div class="label">Products</div>
-    <div class="sec-title">What We Build</div>
-    <p class="sec-sub">A full portfolio of AI-powered tools built for enterprise operations and personal productivity.</p>
-    <div class="grid">
-      <div class="card"><div class="pill live">Live</div><div class="card-icon">🦅</div><div class="card-name">ClawArivu</div><div class="card-desc">Personal AI agent with 36 tools, agentic loop, vision, and Telegram integration.</div><div class="tags"><span class="tag">Node.js</span><span class="tag">MiniMax</span><span class="tag">Telegram</span></div></div>
-      <div class="card"><div class="pill live">Live</div><div class="card-icon">🧠</div><div class="card-name">Neural Brain API</div><div class="card-desc">LLM gateway routing to MiniMax cloud or 40+ local Ollama models with TTS and STT.</div><div class="tags"><span class="tag">FastAPI</span><span class="tag">Ollama</span><span class="tag">MiniMax</span></div></div>
-      <div class="card"><div class="pill beta">Beta</div><div class="card-icon">🔄</div><div class="card-name">OpsShiftPro</div><div class="card-desc">Shift handover SaaS for IT operations with AI-powered summaries and incident tracking.</div><div class="tags"><span class="tag">Node.js</span><span class="tag">SQLite</span><span class="tag">JWT</span></div></div>
-      <div class="card"><div class="pill beta">Beta</div><div class="card-icon">📊</div><div class="card-name">OpsWatch Unified</div><div class="card-desc">Real-time monitoring dashboard with WebSocket live updates and uptime tracking.</div><div class="tags"><span class="tag">Node.js</span><span class="tag">WebSocket</span><span class="tag">React</span></div></div>
-      <div class="card"><div class="pill live">Live</div><div class="card-icon">🔮</div><div class="card-name">Valluvan Astrologer</div><div class="card-desc">Tamil-branded Vedic astrology SaaS with birth charts and AI-powered readings.</div><div class="tags"><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">Tamil</span></div></div>
-      <div class="card"><div class="pill beta">Beta</div><div class="card-icon">🔐</div><div class="card-name">Vault Browser</div><div class="card-desc">Privacy browser companion with AES-256 encrypted vault and privacy scoring.</div><div class="tags"><span class="tag">Node.js</span><span class="tag">AES-256</span><span class="tag">Privacy</span></div></div>
-      <div class="card"><div class="pill live">Live</div><div class="card-icon">🏠</div><div class="card-name">Family Hub</div><div class="card-desc">Private family portal with real-time chat, shared todos, and Abu Dhabi weather.</div><div class="tags"><span class="tag">HTML</span><span class="tag">JS</span><span class="tag">Open-Meteo</span></div></div>
-      <div class="card"><div class="pill dev">Coming</div><div class="card-icon">📱</div><div class="card-name">OpsShiftPro Mobile</div><div class="card-desc">iOS app with push notifications, offline support, and Apple Watch integration.</div><div class="tags"><span class="tag">iOS</span><span class="tag">Swift</span><span class="tag">Apple Watch</span></div></div>
-    </div>
-  </div>
-</section>
-
-<section id="stack" style="background:var(--bg2)">
-  <div class="container">
-    <div class="label">Technology</div>
-    <div class="sec-title">Our Stack</div>
-    <p class="sec-sub">Modern, production-grade technologies across the full stack.</p>
-    <div class="stack-grid">
-      <div class="stack-item"><div style="font-size:28px;margin-bottom:10px">🐍</div><div style="font-size:13px;font-weight:600">Python</div><div style="font-size:11px;color:var(--txt2)">Backend</div></div>
-      <div class="stack-item"><div style="font-size:28px;margin-bottom:10px">⚡</div><div style="font-size:13px;font-weight:600">Node.js</div><div style="font-size:11px;color:var(--txt2)">Backend</div></div>
-      <div class="stack-item"><div style="font-size:28px;margin-bottom:10px">⚛️</div><div style="font-size:13px;font-weight:600">React</div><div style="font-size:11px;color:var(--txt2)">Frontend</div></div>
-      <div class="stack-item"><div style="font-size:28px;margin-bottom:10px">🤖</div><div style="font-size:13px;font-weight:600">MiniMax AI</div><div style="font-size:11px;color:var(--txt2)">AI Provider</div></div>
-      <div class="stack-item"><div style="font-size:28px;margin-bottom:10px">🦙</div><div style="font-size:13px;font-weight:600">Ollama</div><div style="font-size:11px;color:var(--txt2)">Local LLM</div></div>
-      <div class="stack-item"><div style="font-size:28px;margin-bottom:10px">🌐</div><div style="font-size:13px;font-weight:600">Cloudflare</div><div style="font-size:11px;color:var(--txt2)">Tunnel</div></div>
-      <div class="stack-item"><div style="font-size:28px;margin-bottom:10px">🗄️</div><div style="font-size:13px;font-weight:600">SQLite</div><div style="font-size:11px;color:var(--txt2)">Database</div></div>
-      <div class="stack-item"><div style="font-size:28px;margin-bottom:10px">✈️</div><div style="font-size:13px;font-weight:600">Telegram</div><div style="font-size:11px;color:var(--txt2)">Channel</div></div>
-    </div>
-  </div>
-</section>
-
-<section style="padding:60px 24px">
-  <div class="container">
-    <div class="cta-box">
-      <h2>Ready to explore?</h2>
-      <p>Try ClawArivu — our AI agent — or explore the family hub.</p>
-      <div class="btns">
-        <a href="https://chat.arivumaiyam.com" class="btn-p">Open ClawArivu →</a>
-        <a href="https://family.arivumaiyam.com" class="btn-s">Family Hub</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="footer-inner">
-    <div><div class="footer-brand">⚡ Kaashmikhaa Technologies</div><div class="copy" style="margin-top:6px">Built by Bala · Abu Dhabi, UAE · 2026</div></div>
-    <div class="footer-links">
-      <a href="https://chat.arivumaiyam.com">ClawArivu</a>
-      <a href="https://family.arivumaiyam.com">Family</a>
-      <a href="https://valluvan.arivumaiyam.com">Valluvan</a>
-      <a href="https://github.com/balas072024">GitHub</a>
-    </div>
-    <div class="copy">arivumaiyam.com · Kaashmikhaa Technologies</div>
-  </div>
-</footer>
-
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Kaashmikhaa Technologies</title>
+<style>*{box-sizing:border-box;margin:0;padding:0}:root{--bg:#04050a;--bg2:#080c14;--acc:#7c6bff;--txt:#e2e8f0;--txt2:#94a3b8;--bdr:rgba(124,107,255,.18);--bdr2:rgba(124,107,255,.35)}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--txt);font-family:"Segoe UI",system-ui,sans-serif;overflow-x:hidden}nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(4,5,10,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:64px}.nav-logo{font-size:18px;font-weight:700;color:#c4b5fd;text-decoration:none}.nav-links{display:flex;align-items:center;gap:32px}.nav-links a{color:var(--txt2);text-decoration:none;font-size:14px}.nav-links a:hover{color:var(--txt)}.nav-cta{padding:8px 20px;background:var(--acc);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none}.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:100px 24px 60px;position:relative;overflow:hidden}.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(124,107,255,.12),transparent 70%),linear-gradient(rgba(124,107,255,.03)1px,transparent 1px),linear-gradient(90deg,rgba(124,107,255,.03)1px,transparent 1px);background-size:auto,60px 60px,60px 60px}.hero-content{position:relative;max-width:800px}.badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:rgba(124,107,255,.1);border:1px solid var(--bdr2);border-radius:100px;font-size:13px;color:#c4b5fd;margin-bottom:32px}.dot{width:6px;height:6px;border-radius:50%;background:#c4b5fd;animation:pulse 2s infinite}@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}h1{font-size:clamp(36px,6vw,72px);font-weight:800;line-height:1.1;margin-bottom:24px;background:linear-gradient(135deg,#e2e8f0,#c4b5fd,#7c6bff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}.hero p{font-size:18px;color:var(--txt2);line-height:1.7;margin-bottom:40px;max-width:600px;margin-left:auto;margin-right:auto}.btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}.btn-p{padding:14px 32px;background:var(--acc);color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:600;text-decoration:none;display:inline-block}.btn-p:hover{opacity:.85}.btn-s{padding:14px 32px;background:transparent;color:var(--txt);border:1px solid var(--bdr2);border-radius:10px;font-size:16px;font-weight:600;text-decoration:none;display:inline-block}.btn-s:hover{background:rgba(124,107,255,.1)}.stats{display:flex;gap:48px;justify-content:center;margin-top:64px;flex-wrap:wrap}.snum{font-size:32px;font-weight:800;color:#c4b5fd;text-align:center}.slbl{font-size:13px;color:var(--txt2);margin-top:4px;text-align:center}section{padding:100px 24px}.container{max-width:1200px;margin:0 auto}.lbl{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin-bottom:12px}.sec-t{font-size:clamp(28px,4vw,48px);font-weight:800;margin-bottom:16px;background:linear-gradient(135deg,#e2e8f0,#c4b5fd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}.sec-s{font-size:16px;color:var(--txt2);line-height:1.7;max-width:600px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;margin-top:48px}.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:20px;padding:28px;transition:.2s;position:relative}.card:hover{border-color:var(--bdr2);transform:translateY(-4px)}.ci{font-size:32px;margin-bottom:16px}.cn{font-size:18px;font-weight:700;margin-bottom:8px;color:#e2e8f0}.cd{font-size:14px;color:var(--txt2);line-height:1.7;margin-bottom:16px}.tags{display:flex;gap:8px;flex-wrap:wrap}.tag{padding:4px 10px;background:rgba(124,107,255,.1);border:1px solid var(--bdr);border-radius:6px;font-size:12px;color:#c4b5fd}.pill{position:absolute;top:16px;right:16px;padding:3px 10px;border-radius:100px;font-size:11px;font-weight:600}.live{background:rgba(34,197,94,.15);color:#22c55e;border:1px solid rgba(34,197,94,.3)}.beta{background:rgba(245,158,11,.15);color:#f59e0b;border:1px solid rgba(245,158,11,.3)}.dev{background:rgba(148,163,184,.1);color:#94a3b8;border:1px solid rgba(148,163,184,.2)}.sg{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:16px;margin-top:40px}.si{background:var(--bg2);border:1px solid var(--bdr);border-radius:12px;padding:16px;text-align:center}.si:hover{border-color:var(--bdr2)}.cta-box{background:radial-gradient(ellipse at center,rgba(124,107,255,.15),transparent 70%);border:1px solid var(--bdr);border-radius:24px;padding:80px 48px;text-align:center}.cta-box h2{font-size:clamp(28px,4vw,48px);font-weight:800;margin-bottom:16px;background:linear-gradient(135deg,#e2e8f0,#c4b5fd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}.cta-box p{font-size:16px;color:var(--txt2);margin-bottom:40px}footer{border-top:1px solid var(--bdr);padding:48px 40px}.fi{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px}.fb{font-size:16px;font-weight:700;color:#c4b5fd}.fl{display:flex;gap:24px}.fl a{color:var(--txt2);text-decoration:none;font-size:14px}.fl a:hover{color:var(--txt)}.cp{color:#475569;font-size:13px}@media(max-width:768px){nav{padding:0 20px}.nav-links{display:none}.stats{gap:24px}.cta-box{padding:40px 24px}}</style>
+</head><body>
+<nav><a class="nav-logo" href="#">⚡ Kaashmikhaa</a><div class="nav-links"><a href="#products">Products</a><a href="#stack">Stack</a><a href="https://family.arivumaiyam.com" class="nav-cta">Family →</a></div></nav>
+<div class="hero"><div class="hero-bg"></div><div class="hero-content">
+<div class="badge"><div class="dot"></div>Building AI-powered products from Abu Dhabi</div>
+<h1>Intelligence<br>Built Different</h1>
+<p>Kaashmikhaa Technologies builds AI systems, SaaS products, and automation tools — blending Tamil innovation with enterprise-grade engineering.</p>
+<div class="btns"><a href="#products" class="btn-p">Explore Products</a><a href="https://chat.arivumaiyam.com" class="btn-s">Try ClawArivu →</a></div>
+<div class="stats"><div><div class="snum">9+</div><div class="slbl">Products</div></div><div><div class="snum">40+</div><div class="slbl">AI Models</div></div><div><div class="snum">36</div><div class="slbl">Tools</div></div><div><div class="snum">$204K</div><div class="slbl">ARR Target</div></div></div>
+</div></div>
+<section id="products"><div class="container"><div class="lbl">Products</div><div class="sec-t">What We Build</div><p class="sec-s">AI-powered tools for enterprise operations and personal productivity.</p>
+<div class="grid">
+<div class="card"><div class="pill live">Live</div><div class="ci">🦅</div><div class="cn">ClawArivu</div><div class="cd">Personal AI agent with 36 tools, vision, Telegram bot, and 341 skills.</div><div class="tags"><span class="tag">Node.js</span><span class="tag">MiniMax</span><span class="tag">Telegram</span></div></div>
+<div class="card"><div class="pill live">Live</div><div class="ci">🧠</div><div class="cn">Neural Brain API</div><div class="cd">LLM gateway for MiniMax cloud and 40+ local Ollama models with TTS.</div><div class="tags"><span class="tag">FastAPI</span><span class="tag">Ollama</span><span class="tag">MiniMax</span></div></div>
+<div class="card"><div class="pill beta">Beta</div><div class="ci">🔄</div><div class="cn">OpsShiftPro</div><div class="cd">Shift handover SaaS with AI summaries, incidents, and task tracking.</div><div class="tags"><span class="tag">Node.js</span><span class="tag">SQLite</span><span class="tag">JWT</span></div></div>
+<div class="card"><div class="pill beta">Beta</div><div class="ci">📊</div><div class="cn">OpsWatch Unified</div><div class="cd">Real-time service monitoring with WebSocket live updates and alerts.</div><div class="tags"><span class="tag">Node.js</span><span class="tag">WebSocket</span></div></div>
+<div class="card"><div class="pill live">Live</div><div class="ci">🔮</div><div class="cn">Valluvan Astrologer</div><div class="cd">Tamil Vedic astrology SaaS with birth charts and AI-powered readings.</div><div class="tags"><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">Tamil</span></div></div>
+<div class="card"><div class="pill beta">Beta</div><div class="ci">🔐</div><div class="cn">Vault Browser</div><div class="cd">Privacy browser with AES-256 encrypted vault and privacy scoring.</div><div class="tags"><span class="tag">Node.js</span><span class="tag">AES-256</span></div></div>
+<div class="card"><div class="pill live">Live</div><div class="ci">🏠</div><div class="cn">Family Hub</div><div class="cd">Private family portal with chat, todos, notes, and weather.</div><div class="tags"><span class="tag">HTML</span><span class="tag">JS</span></div></div>
+<div class="card"><div class="pill dev">Coming</div><div class="ci">📱</div><div class="cn">OpsShiftPro Mobile</div><div class="cd">iOS app with push notifications and Apple Watch integration.</div><div class="tags"><span class="tag">iOS</span><span class="tag">Swift</span></div></div>
+</div></div></section>
+<section id="stack" style="background:var(--bg2)"><div class="container"><div class="lbl">Technology</div><div class="sec-t">Our Stack</div><p class="sec-s">Modern production-grade technologies across the full stack.</p>
+<div class="sg">
+<div class="si"><div style="font-size:26px;margin-bottom:8px">🐍</div><div style="font-size:13px;font-weight:600">Python</div></div>
+<div class="si"><div style="font-size:26px;margin-bottom:8px">⚡</div><div style="font-size:13px;font-weight:600">Node.js</div></div>
+<div class="si"><div style="font-size:26px;margin-bottom:8px">⚛️</div><div style="font-size:13px;font-weight:600">React</div></div>
+<div class="si"><div style="font-size:26px;margin-bottom:8px">🤖</div><div style="font-size:13px;font-weight:600">MiniMax AI</div></div>
+<div class="si"><div style="font-size:26px;margin-bottom:8px">🦙</div><div style="font-size:13px;font-weight:600">Ollama</div></div>
+<div class="si"><div style="font-size:26px;margin-bottom:8px">🌐</div><div style="font-size:13px;font-weight:600">Cloudflare</div></div>
+<div class="si"><div style="font-size:26px;margin-bottom:8px">🗄️</div><div style="font-size:13px;font-weight:600">SQLite</div></div>
+<div class="si"><div style="font-size:26px;margin-bottom:8px">✈️</div><div style="font-size:13px;font-weight:600">Telegram</div></div>
+</div></div></section>
+<section style="padding:60px 24px"><div class="container"><div class="cta-box"><h2>Ready to explore?</h2><p>Try ClawArivu or explore the family hub.</p><div class="btns"><a href="https://chat.arivumaiyam.com" class="btn-p">Open ClawArivu →</a><a href="https://family.arivumaiyam.com" class="btn-s">Family Hub</a></div></div></div></section>
+<footer><div class="fi"><div><div class="fb">⚡ Kaashmikhaa Technologies</div><div class="cp" style="margin-top:6px">Built by Bala · Abu Dhabi, UAE · 2026</div></div><div class="fl"><a href="https://chat.arivumaiyam.com">ClawArivu</a><a href="https://family.arivumaiyam.com">Family</a><a href="https://valluvan.arivumaiyam.com">Valluvan</a><a href="https://github.com/balas072024">GitHub</a></div><div class="cp">arivumaiyam.com</div></div></footer>
 </body></html>
