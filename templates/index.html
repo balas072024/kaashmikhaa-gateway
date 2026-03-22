@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Arivu Family Hub</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#04050a;--bg2:#080c14;--bg3:#0d1220;--bdr:rgba(124,107,255,.18);--acc:#7c6bff;--txt:#e2e8f0;--txt2:#94a3b8}
+body{background:var(--bg);color:var(--txt);font-family:"Segoe UI",system-ui,sans-serif;min-height:100vh}
+header{background:var(--bg2);border-bottom:1px solid var(--bdr);padding:16px 24px;display:flex;align-items:center;gap:12px}
+header h1{font-size:20px;font-weight:700;color:#c4b5fd}
+.user-bar{margin-left:auto;display:flex;align-items:center;gap:10px}
+.avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;border:2px solid var(--bdr)}
+.main{flex:1;padding:24px;max-width:1200px;margin:0 auto;width:100%}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:24px}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:16px;padding:20px}
+.card h2{font-size:15px;font-weight:600;color:#c4b5fd;margin-bottom:14px}
+.chat-box{height:280px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding:8px;background:var(--bg3);border-radius:8px;margin-bottom:12px}
+.chat-msg{padding:8px 12px;border-radius:10px;font-size:14px;max-width:80%;line-height:1.5}
+.chat-msg.me{background:var(--acc);align-self:flex-end}
+.chat-msg.other{background:var(--bg2);border:1px solid var(--bdr);align-self:flex-start}
+.chat-msg .meta{font-size:11px;opacity:.6;margin-top:4px}
+.chat-input{display:flex;gap:8px}
+input,textarea,select{width:100%;padding:10px 14px;background:var(--bg3);border:1px solid var(--bdr);border-radius:10px;color:var(--txt);font-size:14px;font-family:inherit;outline:none;margin-bottom:8px}
+input:focus,textarea:focus{border-color:var(--acc)}
+button{padding:8px 16px;background:var(--acc);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600}
+button:hover{opacity:.85}
+.btn-sm{padding:6px 12px;font-size:12px}
+.todo-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:14px}
+.todo-item:last-child{border:none}
+.done{text-decoration:line-through;opacity:.5}
+.member{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.member:last-child{border:none}
+.dot-g{width:8px;height:8px;border-radius:50%;background:#22c55e}
+.dot-g2{width:8px;height:8px;border-radius:50%;background:#475569}
+.login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:var(--bg)}
+.login-card{background:var(--bg2);border:1px solid var(--bdr);border-radius:20px;padding:40px;width:100%;max-width:360px;text-align:center}
+.error{color:#ef4444;font-size:13px;margin-top:8px}
+.weather-temp{font-size:48px;font-weight:700;color:#c4b5fd;text-align:center;padding:10px 0}
+</style></head>
+<body>
+
+<div class="login-screen" id="login-screen">
+  <div class="login-card">
+    <div style="font-size:40px;margin-bottom:12px">🏠</div>
+    <h2 style="font-size:20px;font-weight:700;margin-bottom:6px">Family Hub</h2>
+    <p style="color:var(--txt2);font-size:13px;margin-bottom:24px">Sign in to your family space</p>
+    <select id="login-user">
+      <option value="">Select who you are...</option>
+      <option value="bala">👨 Bala (Admin)</option>
+      <option value="wife">👩 Wife</option>
+      <option value="child">👦 Child</option>
+      <option value="parent1">👴 Parent 1</option>
+      <option value="parent2">👵 Parent 2</option>
+    </select>
+    <input type="password" id="login-pwd" placeholder="Password" onkeydown="if(event.key==='Enter')login()">
+    <button onclick="login()" style="width:100%;margin-top:4px">Enter →</button>
+    <div class="error" id="login-error"></div>
+  </div>
+</div>
+
+<div id="app" style="display:none;flex-direction:column;min-height:100vh">
+  <header>
+    <span>🏠</span><h1>Family Hub</h1>
+    <div class="user-bar">
+      <div class="avatar" id="user-avatar">👨</div>
+      <span id="user-name" style="font-size:14px;font-weight:600">Bala</span>
+      <button class="btn-sm" onclick="logout()" style="background:rgba(255,255,255,.1)">Logout</button>
+    </div>
+  </header>
+  <div class="main">
+    <div class="grid">
+      <div class="card" style="grid-column:span 2">
+        <h2>💬 Family Chat</h2>
+        <div class="chat-box" id="chat-box"></div>
+        <div class="chat-input">
+          <input type="text" id="chat-input" placeholder="Type a message..." style="margin:0" onkeydown="if(event.key==='Enter')sendChat()">
+          <button onclick="sendChat()">Send</button>
+        </div>
+      </div>
+      <div class="card">
+        <h2>✅ Family Todos</h2>
+        <div style="display:flex;gap:8px;margin-bottom:12px">
+          <input type="text" id="todo-input" placeholder="Add task..." style="margin:0" onkeydown="if(event.key==='Enter')addTodo()">
+          <button class="btn-sm" onclick="addTodo()">Add</button>
+        </div>
+        <div id="todos-list"></div>
+      </div>
+      <div class="card">
+        <h2>👨‍👩‍👦 Members</h2>
+        <div id="members-list">
+          <div class="member"><div class="dot-g"></div><span>👨 Bala</span><span style="margin-left:auto;font-size:12px;color:var(--txt2)">Admin</span></div>
+          <div class="member"><div class="dot-g2"></div><span>👩 Wife</span></div>
+          <div class="member"><div class="dot-g2"></div><span>👦 Child</span></div>
+          <div class="member"><div class="dot-g2"></div><span>👴 Parent 1</span></div>
+          <div class="member"><div class="dot-g2"></div><span>👵 Parent 2</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <h2>🌤️ Abu Dhabi Weather</h2>
+        <div class="weather-temp" id="weather-temp">--°C</div>
+        <div style="text-align:center;color:var(--txt2);font-size:14px" id="weather-desc">Loading...</div>
+        <div style="text-align:center;color:var(--txt2);font-size:12px;margin-top:8px">Abu Dhabi, UAE (GST UTC+4)</div>
+      </div>
+      <div class="card">
+        <h2>📝 Quick Notes</h2>
+        <input type="text" id="note-title" placeholder="Title...">
+        <textarea id="note-content" rows="3" placeholder="Note..."></textarea>
+        <button class="btn-sm" onclick="saveNote()">Save</button>
+        <div id="notes-list" style="margin-top:12px"></div>
+      </div>
+      <div class="card">
+        <h2>⚡ Services</h2>
+        <div id="sys-status" style="font-size:13px">
+          <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+            <div class="dot-g"></div><span>ClawArivu :18789</span></div>
+          <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+            <div class="dot-g"></div><span>Neural Brain :8200</span></div>
+          <div style="display:flex;align-items:center;gap:8px;padding:6px 0">
+            <div class="dot-g"></div><span>Gateway :5013</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const USERS={bala:{name:'Bala',emoji:'👨',color:'#7c6bff',password:'arivu2024bala',role:'admin'},wife:{name:'Wife',emoji:'👩',color:'#00c9a7',password:'arivu2024wife',role:'member'},child:{name:'Child',emoji:'👦',color:'#f59e0b',password:'arivu2024child',role:'member'},parent1:{name:'Parent 1',emoji:'👴',color:'#ff6b6b',password:'arivu2024p1',role:'member'},parent2:{name:'Parent 2',emoji:'👵',color:'#3dd68c',password:'arivu2024p2',role:'member'}};
+let currentUser=null;
+let chatMessages=JSON.parse(localStorage.getItem('fam_chat')||'[]');
+let todos=JSON.parse(localStorage.getItem('fam_todos')||'[]');
+let notes=JSON.parse(localStorage.getItem('fam_notes')||'[]');
+
+function login(){
+  const uid=document.getElementById('login-user').value;
+  const pwd=document.getElementById('login-pwd').value;
+  const user=USERS[uid];
+  if(!user)return document.getElementById('login-error').textContent='Please select who you are';
+  if(pwd!==user.password)return document.getElementById('login-error').textContent='Wrong password';
+  currentUser={id:uid,...user};
+  document.getElementById('login-screen').style.display='none';
+  document.getElementById('app').style.display='flex';
+  document.getElementById('user-avatar').textContent=user.emoji;
+  document.getElementById('user-avatar').style.background=user.color;
+  document.getElementById('user-name').textContent=user.name;
+  renderChat();renderTodos();renderNotes();loadWeather();
+}
+
+function logout(){
+  currentUser=null;
+  document.getElementById('login-screen').style.display='flex';
+  document.getElementById('app').style.display='none';
+  document.getElementById('login-pwd').value='';
+  document.getElementById('login-error').textContent='';
+}
+
+function sendChat(){
+  const i=document.getElementById('chat-input');
+  const text=i.value.trim();if(!text)return;
+  chatMessages.push({uid:currentUser.id,name:currentUser.name,emoji:currentUser.emoji,text,time:new Date().toLocaleTimeString()});
+  if(chatMessages.length>100)chatMessages=chatMessages.slice(-100);
+  localStorage.setItem('fam_chat',JSON.stringify(chatMessages));
+  i.value='';renderChat();
+}
+
+function renderChat(){
+  const box=document.getElementById('chat-box');
+  box.innerHTML=chatMessages.map(m=>`<div class="chat-msg ${m.uid===currentUser?.id?'me':'other'}">${m.uid!==currentUser?.id?'<span style="font-weight:600">'+m.emoji+' '+m.name+': </span>':''}${m.text}<div class="meta">${m.time}</div></div>`).join('');
+  box.scrollTop=box.scrollHeight;
+}
+
+function addTodo(){
+  const i=document.getElementById('todo-input');
+  const text=i.value.trim();if(!text)return;
+  todos.push({id:Date.now(),text,done:false,by:currentUser.name});
+  localStorage.setItem('fam_todos',JSON.stringify(todos));
+  i.value='';renderTodos();
+}
+
+function toggleTodo(id){
+  const t=todos.find(t=>t.id===id);if(t)t.done=!t.done;
+  localStorage.setItem('fam_todos',JSON.stringify(todos));renderTodos();
+}
+
+function renderTodos(){
+  document.getElementById('todos-list').innerHTML=todos.slice(-10).reverse().map(t=>`<div class="todo-item"><input type="checkbox" ${t.done?'checked':''} onchange="toggleTodo(${t.id})"><span class="${t.done?'done':''}">${t.text}</span><span style="margin-left:auto;font-size:11px;color:var(--txt2)">${t.by}</span></div>`).join('');
+}
+
+function saveNote(){
+  const t=document.getElementById('note-title').value.trim();
+  const c=document.getElementById('note-content').value.trim();
+  if(!t)return;
+  notes.unshift({id:Date.now(),title:t,content:c,by:currentUser.name,date:new Date().toLocaleDateString()});
+  if(notes.length>20)notes=notes.slice(0,20);
+  localStorage.setItem('fam_notes',JSON.stringify(notes));
+  document.getElementById('note-title').value='';
+  document.getElementById('note-content').value='';
+  renderNotes();
+}
+
+function renderNotes(){
+  document.getElementById('notes-list').innerHTML=notes.slice(0,3).map(n=>`<div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:13px"><div style="color:var(--txt2);font-size:11px">${n.by} · ${n.date}</div><div style="font-weight:600">${n.title}</div><div style="color:var(--txt2)">${(n.content||'').slice(0,60)}</div></div>`).join('');
+}
+
+async function loadWeather(){
+  try{
+    const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=24.4539&longitude=54.3773&current=temperature_2m,weathercode&timezone=Asia/Dubai');
+    const d=await r.json();
+    const temp=Math.round(d.current.temperature_2m);
+    const codes={0:'☀️ Clear',1:'🌤️ Mainly clear',2:'⛅ Partly cloudy',3:'☁️ Overcast',61:'🌧️ Rain',80:'🌦️ Showers',95:'⛈️ Thunderstorm'};
+    document.getElementById('weather-temp').textContent=temp+'°C';
+    document.getElementById('weather-desc').textContent=codes[d.current.weathercode]||'Clear';
+  }catch{document.getElementById('weather-desc').textContent='Weather unavailable';}
+}
+</script>
+</body></html>
